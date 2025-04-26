@@ -1,8 +1,10 @@
+import Banner from '@/component/banner';
+
 export default function Main() {
 
   return (
-    <main>
-      main
+    <main className="w-full">
+      <Banner />
     </main>
   )
 }
