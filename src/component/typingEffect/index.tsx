@@ -27,7 +27,6 @@ export default function TypingEffect() {
       $code.style.opacity = '1';
       $code.innerHTML = wrapChars($code.innerHTML);
       const $spans = $code.querySelectorAll('span');
-      console.log(1234, $spans);
       const [$caret] = utils.$('.caret');
       const charsAnim = animate($spans, {
         opacity: [0, 1],

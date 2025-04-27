@@ -1,5 +1,6 @@
 import Banner from '@/component/banner';
 import TypingEffect from '@/component/typingEffect';
+import RollingNumbers from '@/component/rollingNumbers';
 
 export default function Main() {
 
@@ -7,6 +8,7 @@ export default function Main() {
     <main className="w-full">
       <Banner />
       <TypingEffect />
+      <RollingNumbers />
     </main>
   )
 }
