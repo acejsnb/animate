@@ -10,14 +10,23 @@ type ReactRef = {
 interface TimerParams {
   [key: string]: any;
 }
-const scopeHandler = (root: ReactRef, el: string, timerParams?: TimerParams) => createScope({root}).add(() => {
+const scopeHandler = (root: ReactRef, el: string, timerParams?: TimerParams) => createScope({root}).add((self) => {
   const [$code] = utils.$(el);
-  createTimer({
+  const timer = createTimer({
     duration: 3000,
     alternate: true,
     ...timerParams,
     onUpdate: self => $code.innerHTML = String(self.currentTime)
   })
+  self.add('reset', () => {
+    timer.reset();
+  });
+  self.add('play', () => {
+    timer.play();
+  });
+  self.add('pause', () => {
+    timer.pause();
+  });
 });
 
 export default function Index() {
@@ -39,10 +48,11 @@ export default function Index() {
     scope.current?.refresh();
   }
   const timerPlay = () => {
-    (scope2.current?.revertibles[0] as Timer).play();
+    scope2.current?.methods.reset();
+    scope2.current?.methods.play();
   }
   const timerPause = () => {
-    (scope2.current?.revertibles[0] as Timer).pause();
+    scope2.current?.methods.pause();
   }
 
   return (

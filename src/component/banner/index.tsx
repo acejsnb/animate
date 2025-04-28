@@ -2,7 +2,7 @@
 import {useRef, useEffect} from "react";
 import clsx from "clsx";
 import type {Scope} from "animejs";
-import {animate, createScope, stagger, utils} from "animejs";
+import {animate, createScope, stagger, utils, eases} from "animejs";
 
 export default function Banner() {
   const bannerRef = useRef(null);
@@ -14,7 +14,7 @@ export default function Banner() {
         animate('.banner-li', {
           loop: true,
           loopDelay: 1000,
-          ease: "easeInOutExpo",
+          ease: eases.inOutExpo,
           delay: stagger(10, {start: 50}),
           scale: [
             {to: 0},
