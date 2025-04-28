@@ -2,7 +2,23 @@
 import {useEffect, useRef} from "react";
 import type {Scope, Timer} from "animejs";
 import {createTimer, createScope, utils} from "animejs";
-import RefreshSvg from '@/assets/svg/refresh.svg'
+import RefreshSvg from '@/assets/svg/refresh.svg';
+
+type ReactRef = {
+  current?: HTMLElement | SVGElement | null;
+};
+interface TimerParams {
+  [key: string]: any;
+}
+const scopeHandler = (root: ReactRef, el: string, timerParams?: TimerParams) => createScope({root}).add(() => {
+  const [$code] = utils.$(el);
+  createTimer({
+    duration: 3000,
+    alternate: true,
+    ...timerParams,
+    onUpdate: self => $code.innerHTML = String(self.currentTime)
+  })
+});
 
 export default function Index() {
   const root = useRef(null);
@@ -10,23 +26,8 @@ export default function Index() {
   const scope = useRef<Scope>(null);
   const scope2 = useRef<Scope>(null);
   useEffect(() => {
-    scope.current = createScope({root}).add(() => {
-      const [$code] = utils.$('.code1');
-      createTimer({
-        duration: 3000,
-        alternate: true,
-        onUpdate: self => $code.innerHTML = String(self.currentTime)
-      })
-    });
-
-    scope2.current = createScope({root: root2}).add(() => {
-      const [$code] = utils.$('.code2');
-      createTimer({
-        duration: 3000,
-        autoplay: false,
-        onUpdate: self => $code.innerHTML = String(self.currentTime)
-      })
-    });
+    scope.current = scopeHandler(root, '.code1');
+    scope2.current = scopeHandler(root2, '.code2', {autoplay: false});
 
     return () => {
       scope.current?.revert();
@@ -38,7 +39,6 @@ export default function Index() {
     scope.current?.refresh();
   }
   const timerPlay = () => {
-    console.log(scope2.current);
     (scope2.current?.revertibles[0] as Timer).play();
   }
   const timerPause = () => {
@@ -69,11 +69,11 @@ export default function Index() {
 
           <article className="flex items-center justify-center gap-2 mt-3">
             <button
-              className="flex items-center justify-center bg-fuchsia-700 rounded-md w-13 h-6 text-white text-xs cursor-pointer duration-200 hover:opacity-75"
+              className="flex items-center justify-center bg-fuchsia-700 rounded-md w-18 h-6 text-white text-xs cursor-pointer duration-200 hover:opacity-75"
               onClick={timerPlay}
             >Play</button>
             <button
-              className="flex items-center justify-center bg-fuchsia-700 rounded-md w-13 h-6 text-white text-xs cursor-pointer duration-200 hover:opacity-75"
+              className="flex items-center justify-center bg-fuchsia-700 rounded-md w-18 h-6 text-white text-xs cursor-pointer duration-200 hover:opacity-75"
               onClick={timerPause}
             >Pause</button>
           </article>
