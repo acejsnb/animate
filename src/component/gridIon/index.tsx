@@ -1,7 +1,7 @@
 'use client';
 import {useEffect, useRef} from "react";
 import type {Scope} from "animejs";
-import {animate, createScope, utils, stagger} from "animejs";
+import {createScope, utils, stagger, createTimeline} from "animejs";
 
 const backgroundColor = ['rgba(255,255,255,0.3)', '#f00', '#0f0', '#f0f', '#ff0', 'rgba(255,255,255,0.3)'];
 const rotate = () => utils.random(-360, 360);
@@ -13,29 +13,20 @@ export default function GridIon() {
   const scope = useRef<Scope>(null);
 
   useEffect(() => {
-    scope.current = createScope({root}).add(async (self) => {
+    scope.current = createScope({root}).add(async () => {
       const dots = utils.$('.dot');
-      const aniHandler = (from: number | "first" | "center" | "last" | undefined) => animate(dots, {
-        // loop: true,
-        // ease: 'inOutExpo',
-        ease: 'inOutExpo',
-        // playbackEase: 'inOut(1)',
+
+      const addHandler = (from: number | "first" | "center" | "last" | undefined) => ({
         delay: stagger(100, {grid: [30, 30], from}),
-        // autoplay: false,
         rotate: from === 'last' ? 0 : rotate,
         translateX: from === 'last' ? 0 : translateX,
         translateY: from === 'last' ? 0 : translateY,
-        backgroundColor: from === 'last' ? ['rgba(255,255,255,0.3)', 'rgba(255,255,255,0.8)', 'rgba(255,255,255,0.3)'] : backgroundColor
+        backgroundColor: from === 'last' ? ['rgba(255,255,255,0.8)', 'rgba(255,255,255,0.3)'] : backgroundColor
       });
-
-      const runSequentialAnimations = async () => {
-        const a1 = await aniHandler('first').then();
-        await aniHandler('center').then();
-        await aniHandler('last').then();
-        await runSequentialAnimations().then();
-      }
-
-      await runSequentialAnimations();
+      createTimeline({loop: true, defaults: {ease: 'inOutExpo'}})
+        .add(dots, addHandler('first'))
+        .add(dots, addHandler('center'))
+        .add(dots, addHandler('last'))
     });
 
     return () => scope.current?.revert();
