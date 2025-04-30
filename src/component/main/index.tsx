@@ -1,3 +1,5 @@
+'use client';
+import ObserverElement from '@/component/observerElement';
 import Banner from '@/component/banner';
 import TypingEffect from '@/component/typingEffect';
 import RollingNumbers from '@/component/rollingNumbers';
@@ -10,7 +12,7 @@ export default function Main() {
       <Banner />
       <TypingEffect />
       <RollingNumbers />
-      <GridIon />
+      <ObserverElement render={(ref) => <GridIon ref={ref} />} />
     </main>
   )
 }

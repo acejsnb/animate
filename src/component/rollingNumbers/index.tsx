@@ -1,6 +1,6 @@
 'use client';
 import {useEffect, useRef} from "react";
-import type {Scope, Timer} from "animejs";
+import type {Scope} from "animejs";
 import {createTimer, createScope, utils} from "animejs";
 import RefreshSvg from '@/assets/svg/refresh.svg';
 
@@ -29,7 +29,7 @@ const scopeHandler = (root: ReactRef, el: string, timerParams?: TimerParams) => 
   });
 });
 
-export default function Index() {
+export default function RollingNumbers() {
   const root = useRef(null);
   const root2 = useRef(null);
   const scope = useRef<Scope>(null);
@@ -58,23 +58,23 @@ export default function Index() {
   return (
     <>
       <div ref={root} className="flex items-center justify-center w-full">
-        <section className="px-6 py-3 bg-fuchsia-950/30">
+        <section className="px-6 py-3 bg-fuchsia-950/30 w-72">
           <article className="flex items-center justify-between">
             <span className="text-xs text-fuchsia-500">Rolling Numbers</span>
             <RefreshSvg className="w-6 h-6 text-fuchsia-500 cursor-pointer" onClick={timerRefresh} />
           </article>
-          <article className="flex items-center justify-center w-61 mt-3">
-            <code className="code1 flex items-center justify-center bg-fuchsia-950 rounded-md w-40 h-13 text-center">0</code>
+          <article className="flex items-center justify-center bg-fuchsia-950 rounded-md w-full h-13 mt-3">
+            <code className="code1 text-3xl font-digital">0</code>
           </article>
         </section>
       </div>
       <div ref={root2} className="flex items-center justify-center w-full mt-10">
-        <section className="px-6 py-3 bg-fuchsia-950/30">
+        <section className="px-6 py-3 bg-fuchsia-950/30 w-72">
           <article className="flex items-center justify-between">
             <span className="text-xs text-fuchsia-500">Rolling Numbers 《Play | Pause》</span>
           </article>
-          <article className="flex items-center justify-center w-61 mt-3">
-            <code className="code2 flex items-center justify-center bg-fuchsia-950 rounded-md w-40 h-13 text-center">0</code>
+          <article className="flex items-center justify-center bg-fuchsia-950 rounded-md w-full h-13 mt-3">
+            <code className="code2 text-3xl font-digital">0</code>
           </article>
 
           <article className="flex items-center justify-center gap-2 mt-3">
