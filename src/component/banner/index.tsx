@@ -40,7 +40,7 @@ export default function Banner() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center w-full h-[50vw] text-[0px] overflow-hidden">
+    <div data-component="Banner" className="flex items-center justify-center w-full h-[50vw] text-[0px] overflow-hidden">
       <div
         ref={bannerRef}
         className="relative w-full h-full"

@@ -2,8 +2,7 @@
 import {useEffect, useRef} from "react";
 import type {Scope} from "animejs";
 import {animate, createScope, utils, stagger, eases} from 'animejs';
-
-const wrapChars = (str: string) => str.replace(/./g, '<span style="display:inline-block">$&</span>');
+import {wrapChars} from '@/utils';
 
 function randomSteps(length: number) {
   const steps = [0];
@@ -64,7 +63,7 @@ export default function TypingEffect() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center p-20 w-full">
+    <div data-component="TypingEffect" className="flex items-center justify-center p-20 w-full">
       <section className="px-8 py-5 bg-rose-700/10 rounded-md text-md">
         <article className="text-xs text-rose-500">Typing Effect</article>
         <article className="px-6 py-3 bg-rose-700/20 rounded-md mt-3">

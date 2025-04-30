@@ -55,7 +55,7 @@ export default function GridIon({ref}: Props) {
   }));
 
   return (
-    <div ref={root} className="flex items-center justify-center w-full my-50 h-auto">
+    <div data-component="GridIon" ref={root} className="flex items-center justify-center w-full my-50 h-auto">
       <section className="flex items-center justify-center flex-wrap gap-2 w-120 h-120">
         {Array.from({ length: 900 }).map((_, i) => (
           <article key={i} className="dot w-2 h-2 bg-white/30 rounded-full" />

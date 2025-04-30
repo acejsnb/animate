@@ -8,7 +8,11 @@ const config = {
     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      transform: {
+        'scale-105': 'scale(105)'
+      }
+    },
   },
   darkMode: "class",
   plugins: [heroui()]

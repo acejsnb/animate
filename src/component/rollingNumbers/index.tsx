@@ -57,7 +57,7 @@ export default function RollingNumbers() {
 
   return (
     <>
-      <div ref={root} className="flex items-center justify-center w-full">
+      <div data-component="RollingNumbers" ref={root} className="flex items-center justify-center w-full">
         <section className="px-6 py-3 bg-fuchsia-950/30 w-72">
           <article className="flex items-center justify-between">
             <span className="text-xs text-fuchsia-500">Rolling Numbers</span>
@@ -68,7 +68,7 @@ export default function RollingNumbers() {
           </article>
         </section>
       </div>
-      <div ref={root2} className="flex items-center justify-center w-full mt-10">
+      <div data-component="RollingNumbers" ref={root2} className="flex items-center justify-center w-full mt-10">
         <section className="px-6 py-3 bg-fuchsia-950/30 w-72">
           <article className="flex items-center justify-between">
             <span className="text-xs text-fuchsia-500">Rolling Numbers 《Play | Pause》</span>
